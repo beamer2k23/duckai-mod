@@ -462,22 +462,13 @@ export class DuckAI {
 
   getAvailableModels(): string[] {
     return Object.keys(DUCKAI_MODELS);
-    // return [
-    //   "gpt-4o-mini",
-    //   "gpt-5-mini",
-    //   "claude-3-5-haiku-latest",
-    //   "claude-haiku-4-5",
-    //   "meta-llama/Llama-4-Scout-17B-16E-Instruct",
-    //   "mistralai/Mistral-Small-24B-Instruct-2501",
-    //   "tinfoil/gpt-oss-120b",
-    // ];
   }
 
   static transformToDuckAIRequest(
     request: ChatCompletionRequest,
   ): DuckAIRequest {
     // Use the model from request, fallback to default
-    const model = request.model || "gpt-4o-mini";
+    const model = request.model || "gpt-5-mini";
 
     if (!(model in DUCKAI_MODELS)) {
       throw new Error(
@@ -507,13 +498,12 @@ export class DuckAI {
             }
 
             // valid image, transform to DuckChatCompletionRequest
+            // data:image/png;base64,fah
+            console.log(content.image_url);
             const newImagePayload: DuckChatCompletionContentPartImage = {
               image: content.image_url.url,
               type: "image",
-              mimeType: content.image_url.url
-                .split(",")[0]
-                .split(":")[1]
-                .split(";")[0],
+              mimeType: content.image_url.url.split(":")[1].split(";")[0],
             };
             //console.log(newImagePayload);
             transformedContent.push(newImagePayload);
