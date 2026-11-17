@@ -35,6 +35,10 @@ const DEFAULT_DUCKAI_MODELS: Record<string, ModelDefaults> = {
     reasoning_effort: "low",
     valid_reasoning_efforts: ["low"],
   },
+   "tinfoil/gemma4-31b": {
+    reasoning_effort: "low",
+    valid_reasoning_efforts: ["low"],
+  },
   "claude-haiku-4-5": {
     reasoning_effort: "none",
     valid_reasoning_efforts: ["none", "low"],
